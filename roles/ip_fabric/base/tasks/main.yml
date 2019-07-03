@@ -1,0 +1,14 @@
+---
+- name: ip_fabric_base_{{ role }} - file check
+  file:
+    path: "./roles/ip_fabric/files/generated_base_{{ inventory_hostname }}.cfg"
+    state: absent
+  changed_when: no
+  check_mode: no
+  delegate_to: localhost
+
+- name: ip_fabric_base_{{ role }} - config generate
+  template:
+    src: ./roles/ip_fabric/templates/base_{{ role }}.cfg
+    dest: ./roles/ip_fabric/files/generated_base_{{ inventory_hostname }}.cfg
+  delegate_to: localhost

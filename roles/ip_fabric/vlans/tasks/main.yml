@@ -1,0 +1,14 @@
+---
+- name: ip_fabric_vlans - file check
+  file:
+    path: "./roles/ip_fabric/files/generated_vlans_{{ inventory_hostname }}.cfg"
+    state: absent
+  changed_when: no
+  check_mode: no
+  delegate_to: localhost
+
+- name: ip_fabric_vlans - config generate
+  template:
+    src: ./roles/ip_fabric/templates/add_vlans.cfg
+    dest: ./roles/ip_fabric/files/generated_vlans_{{ inventory_hostname }}.cfg
+  delegate_to: localhost
