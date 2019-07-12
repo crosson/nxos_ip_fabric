@@ -8,18 +8,6 @@
   roles: 
     - ip_fabric/base
     - ip_fabric/vlans
-
-  tasks:
-    - name: "Push Config to leaf"
-      nxos_config:
-        src: ./roles/ip_fabric/files/generated_base_{{ inventory_hostname }}.cfg
-      vars:
-        ansible_command_timeout: 60
-    - name: "Push vlans to leaf"
-      nxos_config:
-        src: ./roles/ip_fabric/files/generated_vlans_{{ inventory_hostname }}.cfg
-      vars:
-        ansible_command_timeout: 60
   tags: deploy_leaf
 
 - name: "Update Spines"
@@ -29,9 +17,4 @@
 
   roles:
     - ip_fabric/add_leaf_to_spine
-
-  tasks:
-    - name: "Push config to spines"
-      nxos_config:
-        src: ./roles/ip_fabric/files/generated_add_leaf_to_spine_{{ inventory_hostname }}.cfg
   tags: update_spines

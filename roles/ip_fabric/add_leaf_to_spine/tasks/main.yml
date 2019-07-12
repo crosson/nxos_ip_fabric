@@ -6,9 +6,18 @@
   changed_when: no
   check_mode: no
   delegate_to: localhost
+  tags: generate_config
 
 - name: add_leaf_to_spine - config generate
   template:
     src: ./roles/ip_fabric/templates/add_leaf_to_spine.cfg
     dest: ./roles/ip_fabric/files/generated_add_leaf_to_spine_{{ inventory_hostname }}.cfg
   delegate_to: localhost
+  tags: generate_config
+
+- name: "Push config to spines"
+  nxos_config:
+    src: ./roles/ip_fabric/files/generated_add_leaf_to_spine_{{ inventory_hostname }}.cfg
+  vars:
+    ansible_command_timeout: 60
+  tags: push_config

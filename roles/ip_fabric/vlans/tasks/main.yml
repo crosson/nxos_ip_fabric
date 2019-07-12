@@ -12,3 +12,10 @@
     src: ./roles/ip_fabric/templates/add_vlans.cfg
     dest: ./roles/ip_fabric/files/generated_vlans_{{ inventory_hostname }}.cfg
   delegate_to: localhost
+
+- name: "Push vlans to leaf"
+  nxos_config:
+    src: ./roles/ip_fabric/files/generated_vlans_{{ inventory_hostname }}.cfg
+  vars:
+    ansible_command_timeout: 120
+  tags: push_config

@@ -1,0 +1,10 @@
+- name: "Generate config"
+  hosts: "{{ HOSTS }}"
+  gather_facts: no
+  serial: 1
+
+  tasks:
+    - name: "Generate {{ role }} config"
+      include_role:
+        name: ip_fabric/vlans
+      delegate_to: locahost

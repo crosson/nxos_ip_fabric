@@ -6,9 +6,18 @@
   changed_when: no
   check_mode: no
   delegate_to: localhost
+  tags: generate_config
 
 - name: ip_fabric_base_{{ role }} - config generate
   template:
     src: ./roles/ip_fabric/templates/base_{{ role }}.cfg
     dest: ./roles/ip_fabric/files/generated_base_{{ inventory_hostname }}.cfg
   delegate_to: localhost
+  tags: generate_config
+
+- name: "Push Config to leaf"
+  nxos_config:
+    src: ./roles/ip_fabric/files/generated_base_{{ inventory_hostname }}.cfg
+  vars:
+    ansible_command_timeout: 120
+  tags: push_config

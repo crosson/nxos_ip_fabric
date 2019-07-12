@@ -1,0 +1,23 @@
+---
+- name: ip_fabric_add_vpc - file check
+  file:
+    path: "./roles/ip_fabric/files/add_vpc_{{ inventory_hostname }}.cfg"
+    state: absent
+  changed_when: no
+  check_mode: no
+  delegate_to: localhost
+  tags: generate_config
+
+- name: ip_fabric_add_vpc - config generate
+  template:
+    src: ./roles/ip_fabric/templates/add_vpc.cfg
+    dest: ./roles/ip_fabric/files/add_vpc_{{ inventory_hostname }}.cfg
+  delegate_to: localhost
+  tags: generate_config
+
+- name: "ip_fabric_add_vpc - config push"
+  nxos_config:
+    src: ./roles/ip_fabric/files/add_vpc_{{ inventory_hostname }}.cfg
+  vars:
+    ansible_command_timeout: 120
+  tags: push_config

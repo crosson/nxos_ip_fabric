@@ -1,0 +1,10 @@
+---
+- name: "Deploy Spine"
+  hosts: "{{ HOST }}"
+  gather_facts: no
+  serial: 1
+  connection: network_cli
+
+  roles: 
+    - ip_fabric/base
+  tags: deploy_spines

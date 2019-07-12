@@ -1,0 +1,21 @@
+---
+- name: ip_fabric_vpc_domain - file check
+  file:
+    path: "./roles/ip_fabric/files/vpc_domain_{{ inventory_hostname }}.cfg"
+    state: absent
+  changed_when: no
+  check_mode: no
+  delegate_to: localhost
+  tags: generate_config
+
+- name: ip_fabric_vpc_domain - config generate
+  template:
+    src: ./roles/ip_fabric/templates/vpc_domain.cfg
+    dest: ./roles/ip_fabric/files/vpc_domain_{{ inventory_hostname }}.cfg
+  delegate_to: localhost
+  tags: generate_config
+
+- name: "ip_fabric_vpc_domain - config push"
+  nxos_config:
+    src: ./roles/ip_fabric/files/vpc_domain_{{ inventory_hostname }}.cfg
+  tags: push_config

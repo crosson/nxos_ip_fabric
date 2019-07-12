@@ -1,0 +1,9 @@
+---
+- name: "Deploy Leaf"
+  hosts: "vpc"
+  gather_facts: no
+  serial: 1
+  connection: network_cli
+
+  roles: 
+    - ip_fabric/vpc_domain
