@@ -1,0 +1,8 @@
+fabric_links:
+  - "Ethernet1/1"
+  - "Ethernet1/2"
+  - "Ethernet1/3"
+  - "Ethernet1/4"
+  - "Ethernet1/5"
+  - "Ethernet1/6"
+  - "Ethernet1/7"

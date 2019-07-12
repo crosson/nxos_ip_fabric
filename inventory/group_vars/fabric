@@ -1,5 +1,14 @@
 VLANS:
-  - vlan_descr: net_1
+  - vlan_descr: client_a_l3_vni
+    vlan_id: 100
+    vn_segment: 16100
+    has_svi: false
+    vrf: TENANT-1
+    svi_address:
+    has_dhcp_relay: false
+    dhcp_server:
+    l3_vnid: true
+  - vlan_descr: clients_a_hosts_a
     vlan_id: 101
     vn_segment: 16101
     has_svi: true
@@ -8,7 +17,7 @@ VLANS:
     has_dhcp_relay: true
     dhcp_server: "192.168.253.10"
     l3_vnid: false
-  - vlan_descr: net_2
+  - vlan_descr: clients_a_hosts_a
     vlan_id: 102
     vn_segment: 16102
     has_svi: true

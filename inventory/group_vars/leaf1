@@ -1,0 +1,4 @@
+vpc_port_channels:
+  - name: ethernet1/15
+    vlan: 101
+    channel_group: 10

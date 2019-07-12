@@ -1,13 +1,19 @@
 [spines]
-spine1 ansible_host=10.254.254.161 role=spine lo0=10.255.1.1 hostname=spine1
-spine2 ansible_host=10.254.254.162 role=spine lo0=10.255.1.2 hostname=spine2
-spine3 ansible_host=10.254.254.163 role=spine lo0=10.255.1.3 hostname=spine3
+spine1 ansible_host=10.254.254.210 role=spine lo0=10.255.1.1 hostname=spine1
+spine2 ansible_host=10.254.254.211 role=spine lo0=10.255.1.2 hostname=spine2
+spine3 ansible_host=10.254.254.212 role=spine lo0=10.255.1.3 hostname=spine3
 
 [leaves]
-leaf1a ansible_host=10.254.254.171 role=leaf lo0a=10.255.2.1 lo0b=10.255.3.1 hostname=leaf1a
-leaf1b ansible_host=10.254.254.172 role=leaf lo0a=10.255.2.1 lo0b=10.255.3.2 hostname=leaf1b
-leaf2 ansible_host=10.254.254.173 role=leaf lo0a=10.255.2.2 lo0b=10.255.3.3 hostname=leaf2
+leaf1a ansible_host=10.254.254.221 role=leaf lo0a=10.255.2.1 lo0b=10.255.3.1 hostname=leaf1a vpc=a
+leaf1a ansible_host=10.254.254.222 role=leaf lo0a=10.255.2.2 lo0b=10.255.3.1 hostname=leaf1b vpc=b
+leaf2 ansible_host=10.254.254.223 role=leaf lo0a=10.255.2.3 lo0b=10.255.3.3 hostname=leaf3
 
+#leaf1 ansible_host=10.0.0.211 role=leaf lo0a=10.255.2.1 lo0b=10.255.3.1 hostname=leaf1
+#leaf3a ansible_host=10.0.0.213 role=leaf lo0a=10.255.2.3 lo0b=10.255.3.3 hostname=leaf3a vpc=a
+#leaf3b ansible_host=10.0.0.214 role=leaf lo0a=10.255.2.4 lo0b=10.255.3.3 hostname=leaf3b vpc=b
+#leaf4 ansible_host=10.0.0.215 role=leaf lo0a=10.255.2.5 lo0b=10.255.3.5 hostname=leaf4
+#leaf5a ansible_host=10.0.0.216 role=leaf lo0a=10.255.2.6 lo0b=10.255.3.6 hostname=leaf3a vpc=a
+#leaf5b ansible_host=10.0.0.217 role=leaf lo0a=10.255.2.7 lo0b=10.255.3.6 hostname=leaf3b vpc=b
 
 [fabric:children]
 leaves
@@ -16,8 +22,33 @@ spines
 [fabric:vars]
 ansible_network_os=nxos
 
+[vpc:children]
+vpca
+vpcb
+
+[vpc:vars]
+peer_link_interfaces = ["Ethernet1/4", "Ethernet1/5"]
+
 [vpca]
 leaf1a
 
+[vpca:vars]
+local_keepalive_address=169.254.255.1
+remote_peer_keepalive_address=169.254.255.2
+keepalive_interface=Ethernet1/6
+
 [vpcb]
 leaf1b
+
+[vpcb:vars]
+local_keepalive_address=169.254.255.2
+remote_peer_keepalive_address=169.254.255.1
+keepalive_interface=Ethernet1/6
+
+[leaf3]
+leaf3a
+leaf3b
+
+[leaf5]
+leaf5a
+leaf5b
