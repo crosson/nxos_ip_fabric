@@ -17,7 +17,7 @@ VLANS:
     has_dhcp_relay: true
     dhcp_server: "192.168.253.10"
     l3_vnid: false
-  - vlan_descr: clients_a_hosts_a
+  - vlan_descr: clients_a_hosts_b
     vlan_id: 102
     vn_segment: 16102
     has_svi: true
