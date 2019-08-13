@@ -9,6 +9,14 @@ modified to support your specific 9k model. LACP Does not work in eve-ng. bond i
 
 ![Topology](example_topology.JPG?raw=true "Topology")
 
+### Summary of Technologies used
+
+* Cisco's anycast gateway
+* OSPF with an ip-unnumbered underlay
+* MP BGP with EVPN and vxlan
+* Support for VPC configured pairs and non VPC switches
+
+
 ## This Demo can:
 
 * Deploy Spines
