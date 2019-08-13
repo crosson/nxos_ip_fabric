@@ -1,10 +1,9 @@
 # IP Fabric Ansible Deploy Demo
 
 This repository demonstrates a series of playbooks that automates the managemnet
-of a standard CLOS styled IP-Fabric. We hope to demonstrate a few techniques
-which can be used to ease the deployment of the Azure/Skytap deployment. This
+of a standard CLOS styled IP-Fabric. I hope to demonstrate an ansible based techniques in deploying an nxos based IP fabric. This
 lab is built on eve-ng using nxosv images. Configuration will need to be
-modified to support your specific 9k model.
+modified to support your specific 9k model. LACP Does not work in eve-ng. bond interfaces will need to be non LACP based.
 
 ## Example Topology
 
