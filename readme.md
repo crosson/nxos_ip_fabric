@@ -6,9 +6,9 @@ which can be used to ease the deployment of the Azure/Skytap deployment. This
 lab is built on eve-ng using nxosv images. Configuration will need to be
 modified to support your specific 9k model.
 
-##Example Topology
+## Example Topology
 
-[image](topology_example.png)
+![Topology](example_topology.JPG?raw=true "Topology")
 
 ## This Demo can:
 
